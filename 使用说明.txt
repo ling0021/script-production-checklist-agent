@@ -34,5 +34,7 @@ Windows如果没有python3命令，可以使用python。
 ZIP用于方便保存和传递，不能代替老师明确要求的GitHub仓库链接。
 
 五、GitHub
-代码和文档已经准备好；是否已远程创建仓库、完成PR与合并，以实际网页为准。
-GITHUB_STEPS.txt中有手动操作说明。不要向任何人发送登录密码或验证码。
+仓库：https://github.com/ling0021/script-production-checklist-agent
+个人分支与合并记录：https://github.com/ling0021/script-production-checklist-agent/pull/1
+最终项目使用main分支，ZIP不包含Git历史。
+Canvas尚未代为提交。

@@ -1,6 +1,6 @@
 {
   "naming_and_content_checks": "PASS",
-  "files_checked": 25,
+  "files_checked": 26,
   "presentation_xml_checked": true,
   "pdf_text_and_metadata_checked": true,
   "offline_tests": 15,
@@ -10,17 +10,17 @@
     "incomplete"
   ],
   "evidence_note": "Views are rendered from saved live reports, not browser screenshots.",
-  "publication_status": "Local implementation branch prepared; remote repository and pull request require account sign-in.",
+  "publication_status": "Repository published at https://github.com/ling0021/script-production-checklist-agent; implementation and merge history: pull/1.",
   "files": {
-    "使用说明.txt": "0b66a859fc92f1de76db0a7bc8ad09656d53c6f524e9ac9552660fbecbe99ac0",
+    "使用说明.txt": "c69df692dfde4e72a32cabe9335d9ea9430b08e96f93355a5dec9aa3f2b1fc07",
     "requirements.txt": "bb71d77bbaa5be36ff876ae821ca9e8c09a8e734f4ef31f3493ae43be8d1854a",
     "tools.py": "91bba943360eb7a3bbabfe562e849d61a0c7f523f1dde44332e28e736a8feee2",
-    "README.md": "ddc848b2ca336dbdc3aa342d2cf66bbb4748bad2abb3028dceb75f8001486323",
+    "README.md": "8895f0ca6cb4f7851726f155ca48d4385e4e4717ce5386e1317dabf0ce6531c5",
     "verify_reports.py": "a031900df5fe29adce191781c3472af4859430f74889435787856d3fd6515d95",
     ".gitignore": "f8d6fc5b1fc7ae047e42c6920bfdb6e3773adda4177c12e927be06e9f4d01d5a",
     "agent.py": "560154690b05158c7bca216b11f16253a8de9af18228dd05dc3752de0e94e231",
     "DEMO_GUIDE.txt": "89e6266ff56a1d35862e32a1e025637d694b6c83faa9d53f513fc5b06e68395a",
-    "GITHUB_STEPS.txt": "6910a430757813c6f58ddce7841517826490ec3701dc25e8b7b38ba8d678d50e",
+    "GITHUB_STEPS.txt": "f289f7ab387e96b90b66992df990be4ab6121003eb174f6d19b9e5d85e833aea",
     "scenes/incomplete.txt": "df908a10633d8b76dc9212ada13dfaaa75a2318b69d3afb8bfc9693416a29d1c",
     "scenes/complete.txt": "1bb712c6030ea6a3911de0536c0629864d775fcfd5924047185961fe8bcbb660",
     "evidence/incomplete_report.json": "565b098db93cf05f1cb2772c1d274831eb9ef5a6a4de9dcccbf12ebeae2634fd",
@@ -36,6 +36,6 @@
     "config/checklist.json": "ab828d83fdde72f3b527b6fe2feb18f0acffd47ff0f539289f42c95cead226f1",
     "tests/test_tools.py": "2efa85494dcfd3793e99dd684251156c6f144f0d6e5f6ef8ebdd4e0f122cd602",
     "deliverables/Project_Presentation.pptx": "e74de0f28e1750f05449c633eb99df4bb50fada4c37f4130ded7162a0512cd14",
-    "deliverables/Project_Report.pdf": "13d99de4fd6cb9ec225048fd7f67408f7b83b453a0aab6faf73fcf90aef5fb9b"
+    "deliverables/Project_Report.pdf": "5aea295821ad53975db0ba52d61ccaa125839d8e4b7b65bd5a85050e839bec7a"
   }
 }

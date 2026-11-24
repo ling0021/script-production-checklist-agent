@@ -141,6 +141,9 @@ missing details. Multi-scene merging and an editor are possible later extensions
 
 ## GitHub submission
 
-Use a separate project repository. Create a personal branch, push it, open a pull
-request into `main`, inspect the changes and merge it. The submitted repository's
-`main` must contain the final working files. See `GITHUB_STEPS.txt` for commands.
+Repository: https://github.com/ling0021/script-production-checklist-agent
+
+Implementation and merge record: https://github.com/ling0021/script-production-checklist-agent/pull/1
+
+The personal implementation branch is `project-implementation`. Use `main` for
+the final working project. Submit the repository link, presentation and PDF.
