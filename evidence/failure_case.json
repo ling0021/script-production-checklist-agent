@@ -1,0 +1,22 @@
+{
+  "proposal": {
+    "tool": "read_scene",
+    "arguments": {
+      "scene_id": "credit_card"
+    }
+  },
+  "observation": {
+    "ok": false,
+    "message": "Read the scene requested by the user.",
+    "data": {}
+  },
+  "state_before": {
+    "requested_scene": "complete",
+    "finished": false
+  },
+  "state_after": {
+    "requested_scene": "complete",
+    "finished": false
+  },
+  "independent_check": "PASS: rejected without changing state"
+}

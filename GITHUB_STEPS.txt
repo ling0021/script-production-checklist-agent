@@ -1,0 +1,12 @@
+GitHub submission - individual project: Ling Yang
+
+Repository: https://github.com/ling0021/script-production-checklist-agent
+Implementation pull request: https://github.com/ling0021/script-production-checklist-agent/pull/1
+Branch: project-implementation -> main
+
+The pull request records the implementation and merge history.
+Use main for the final working project. The ZIP excludes Git history; the remote
+repository preserves commits and the pull request.
+
+Submit the repository link, deliverables/Project_Presentation.pptx and
+deliverables/Project_Report.pdf through the assignment.

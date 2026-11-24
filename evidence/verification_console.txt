@@ -1,0 +1,21 @@
+[
+  {
+    "case": "complete",
+    "independent_check": "PASS",
+    "steps": 3,
+    "status": "ready_for_human_review",
+    "questions": [],
+    "elapsed_seconds": 9.44
+  },
+  {
+    "case": "incomplete",
+    "independent_check": "PASS",
+    "steps": 3,
+    "status": "needs_clarification",
+    "questions": [
+      "Where does this scene take place?",
+      "What is the item referred to in this scene?"
+    ],
+    "elapsed_seconds": 13.17
+  }
+]
