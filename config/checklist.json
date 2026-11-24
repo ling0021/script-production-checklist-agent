@@ -1,0 +1,5 @@
+{
+  "categories": ["characters", "locations", "props", "actions"],
+  "purpose": "Identify the people, locations, physical props, and actions required by a fictional scene.",
+  "rule": "Every extracted item needs an exact supporting quote. Missing or ambiguous details must be flagged for human review."
+}

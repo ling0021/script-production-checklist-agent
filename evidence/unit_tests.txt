@@ -1,0 +1,20 @@
+test_compare_before_read (test_tools.ToolTests.test_compare_before_read) ... ok
+test_extra_arguments_rejected (test_tools.ToolTests.test_extra_arguments_rejected) ... ok
+test_finish_must_match_observation (test_tools.ToolTests.test_finish_must_match_observation) ... ok
+test_incomplete_scene_flags_and_questions (test_tools.ToolTests.test_incomplete_scene_flags_and_questions) ... ok
+test_invalid_question_rejected (test_tools.ToolTests.test_invalid_question_rejected) ... ok
+test_invented_prop_rejected (test_tools.ToolTests.test_invented_prop_rejected) ... ok
+test_missing_category_rejected (test_tools.ToolTests.test_missing_category_rejected) ... ok
+test_multiple_actions_blocked (test_tools.ToolTests.test_multiple_actions_blocked) ... ok
+test_premature_finish_blocked (test_tools.ToolTests.test_premature_finish_blocked) ... ok
+test_read_success (test_tools.ToolTests.test_read_success) ... ok
+test_supported_comparison (test_tools.ToolTests.test_supported_comparison) ... ok
+test_unknown_scene_leaves_state_unchanged (test_tools.ToolTests.test_unknown_scene_leaves_state_unchanged) ... ok
+test_unknown_tool (test_tools.ToolTests.test_unknown_tool) ... ok
+test_value_not_in_evidence_rejected (test_tools.ToolTests.test_value_not_in_evidence_rejected) ... ok
+test_wrong_requested_scene (test_tools.ToolTests.test_wrong_requested_scene) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.001s
+
+OK

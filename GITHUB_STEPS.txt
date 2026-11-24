@@ -1,0 +1,37 @@
+GitHub submission - individual project
+
+Use a NEW empty repository named script-production-checklist-agent.
+The project is separate from the earlier shared browser-tool assignment.
+
+The working folder has a main branch with an initial commit and a project branch
+containing the implementation. The ZIP excludes Git history. If using the ZIP,
+first run:
+   git init -b main
+   git add .gitignore
+   git commit -m "Initialize project repository"
+   git switch -c project-implementation
+   git add .
+   git commit -m "Implement scene checklist agent and demonstrations"
+
+After creating the empty repository on GitHub:
+
+1. Copy its SSH repository URL, then run inside this folder:
+   git remote add origin YOUR_SSH_REPOSITORY_URL
+   git push -u origin main
+   git push -u origin project-implementation
+2. On GitHub, open a pull request:
+   base: main
+   compare: project-implementation
+3. Use title: Implement Script Production Checklist Agent
+4. In the description include:
+   - Individual project: Ling Yang
+   - Two tools, model-selected actions and evidence-checked completion
+   - Complete and incomplete scene demonstrations
+   - 15 offline tests and independent checks of both live reports
+   - Limitations: two fixtures, substring evidence checks, human review required
+5. Review Files changed and merge the pull request.
+6. Confirm main contains agent.py, tools.py, tests, evidence and deliverables.
+7. Submit the repository link, presentation and PDF through the assignment.
+
+Local branches and commits are not a substitute for the required GitHub pull
+request and merge. Do not claim this step is complete until the remote PR exists.

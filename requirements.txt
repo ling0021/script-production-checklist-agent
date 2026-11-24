@@ -1,0 +1,2 @@
+# Application and tests use only the Python 3.10+ standard library.
+# Install Ollama separately and download qwen3:8b before live runs.

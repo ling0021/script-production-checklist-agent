@@ -1,0 +1,38 @@
+Script Production Checklist Agent
+个人项目：Ling Yang
+
+一、项目内容
+- agent.py：本地模型决策循环和响应结构。
+- tools.py：读取场景、检查制作清单，以及完成状态的验证。
+- scenes：完整场景和缺失信息场景，均为虚构示例。
+- evidence：真实模型运行记录、独立核验、15项测试和结果视图。
+- deliverables：提交用PDF和PowerPoint。
+- DEMO_GUIDE.txt：英语展示提纲及老师可能问的问题。
+
+二、怎样运行
+先安装Ollama，下载qwen3:8b，并启动本地服务。
+在本文件夹打开终端，执行：
+python3 agent.py --scene complete
+python3 agent.py --scene incomplete
+python3 verify_reports.py
+python3 -m unittest discover -s tests -v
+Windows如果没有python3命令，可以使用python。
+再次运行将覆盖同名报告，想保留已有证据请先复制。
+
+三、展示时要理解
+模型选择下一步动作，Python验证并执行。
+工具结果反馈给模型，模型据此选择结束或继续。
+完整案例：输出待人工审核的清单。
+缺失案例：不编造地点或物品，向人提出具体问题。
+这不涉及重新训练模型，模型权重没有改变。
+引用原文只能验证文字依据，不能证明语义分类绝对正确，所以仍需人工审核。
+
+四、要提交什么
+1. GitHub仓库链接：main中有最终项目，并完成个人分支到main的PR和合并。
+2. deliverables/Project_Presentation.pptx
+3. deliverables/Project_Report.pdf
+ZIP用于方便保存和传递，不能代替老师明确要求的GitHub仓库链接。
+
+五、GitHub
+代码和文档已经准备好；是否已远程创建仓库、完成PR与合并，以实际网页为准。
+GITHUB_STEPS.txt中有手动操作说明。不要向任何人发送登录密码或验证码。
