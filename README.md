@@ -78,36 +78,62 @@ This shortened example illustrates the format; it is not the full demonstration 
 
 ## Actual demonstrations
 
-Both supplied reports were generated with the same final program and local
-`qwen3:8b`, temperature 0, seed 42, on November 24, 2026. No prerecorded model
-responses are used by the runner.
+Three reports were generated with the same final program and local `qwen3:8b`,
+temperature 0, seed 42, on November 24, 2026 (Pacific time). The JSON timestamps
+use UTC. No prerecorded model responses are used by the runner.
 
-| Case | Model-selected actions | Verified result | Time |
+| Case | Model turns | Checked status | Time |
 | --- | --- | --- | --- |
-| Complete | read_scene, compare_checklist, finish | ready_for_human_review; no questions | 9.44 s |
-| Incomplete | read_scene, compare_checklist, finish | needs_clarification; two questions | 13.17 s |
+| complete | 3 | ready_for_human_review | 11.23 s |
+| incomplete | 3 | needs_clarification | 11.9 s |
+| recovery | 4 | ready_for_human_review | 13.61 s |
 
-The incomplete scene has no named setting and uses "the item" without identifying
-it. The model left locations empty and supplied a prop uncertainty. The tool
-returned "Where does this scene take place?" and "What is the item referred to in
-this scene?" The model then chose the clarification finish status and preserved
-those questions. It did not invent a location or reuse the other scene's blue folder.
+The complete case follows read_scene -> compare_checklist -> finish. The incomplete
+case has no named setting and uses "the item" without identifying it. Its confirmed
+props contain only wooden table and silver camera; ambiguous references are not
+confirmed production props. Python supplies the missing-location question from a
+template. The model supplies the question about "the item". Python derives the
+status from checked issues; finish requests must preserve that result.
 
-The visible order is the same in these two short demonstrations, but the model's
-extraction, uncertainty decision and final status differ because of the observations.
-The tool gates constrain valid execution; the loop itself does not automatically
-invoke either tool or pick the final status for the model.
+The recovery experiment uses the same program with an explicit test flag:
+
+```sh
+python3 agent.py --scene complete --test-read-failure --output evidence/recovery_report.json
+```
+
+This injects exactly one transient read failure. It is a controlled test, NOT a real
+filesystem outage. The model actually receives the error and chooses read_scene
+again, then compare_checklist and finish. Python does not insert a retry action or
+fabricate model responses. The error itself recommends retrying, so this shows
+feedback-following within a constrained task, not independent recovery planning.
+
+Normal calls have prerequisites: read before compare; compare before finish. Those
+are execution guards, not evidence of unrestricted planning. The model performs
+extraction, identifies uncertainty and proposes the next action. Python determines
+the checked status and enforces completion. A finish status is not a free model
+choice. The normal and recovery traces provide concrete evidence of differing
+model-selected action sequences.
+
+During development, the model omitted a stated scene-header location and once
+misspelled an evidence quote. The missing-location observation could not by itself
+guarantee correct extraction. Instructions now explicitly describe scene headings
+and rechecking omissions. This is a development lesson, not a claim of measured
+accuracy improvement; the supplied three reports come from the final version.
 
 ## Evidence and independent checks
 
-- `evidence/complete_report.json`, `evidence/incomplete_report.json`: raw model
+- `evidence/complete_report.json`, `evidence/incomplete_report.json`,
+  `evidence/recovery_report.json`: raw model
   responses, proposals, tool observations, status, timing and source hashes.
 - `evidence/complete_console.txt`, `evidence/incomplete_console.txt`: actual console output.
 - `evidence/independent_checks.json`: independent assertions against scene text and
   handwritten case expectations, not just the model's success statement.
-- `evidence/unit_tests.txt`: 15 passing offline tests, including invalid input,
-  unsupported details, missing information, and premature or mismatched completion.
-- `evidence/failure_case.json`: direct invalid-scene rejection with unchanged state.
+- `evidence/unit_tests.txt`: 19 passing offline tests, including invalid input,
+  unsupported details, tiny quotes, unresolved props, invalidated stale comparisons,
+  one-shot fault injection, missing information, and premature or mismatched completion.
+- `evidence/failure_case.json`: direct invalid-scene rejection with unchanged state;
+  a tool unit check, not a live agent experiment. Invalid CLI scene IDs are rejected
+  by argparse before the model runs. Use the explicit recovery command for a live failure demo.
 - `evidence/*_view.png`: readable evidence views rendered from the saved JSON;
   these are not browser screenshots.
 
@@ -125,7 +151,8 @@ invoke either tool or pick the final status for the model.
 
 ## Limitations
 
-Exact substring matching blocks unsupported wording, but does not prove correct
+Exact quote matching, minimum lengths and word boundaries reject some unsupported
+wording, but do not prove correct
 classification or complete coverage of every scene fact. A real quote can still be
 assigned to the wrong category. The independent case checks test the supplied
 examples; they are not a general semantic verifier. A human reviews every checklist.
@@ -134,10 +161,28 @@ Only two scenes are registered in the allowlist. To try your own fictional mater
 replace a sample scene or add an entry to `SCENES` in `tools.py`. Update independent
 expectations if the test fixtures change. Do not use private production documents.
 
-One live run per case is a demonstration, not a reliability estimate. Model versions
+One final live run per condition is a demonstration, not a reliability estimate. Model versions
 and machines can change results even with a fixed seed. This project does not
 schedule shoots, perform purchases, update model weights, or automatically resolve
-missing details. Multi-scene merging and an editor are possible later extensions.
+missing details. The "the one" reference is not separately flagged in the saved
+incomplete run; human review must check whether it denotes the same item or a
+different object. Multi-scene merging and an editor are possible later extensions.
+
+## Course and rubric alignment
+
+- Working task: complete scene checklist and missing-information questions, using fictional inputs.
+- Agent behavior: model proposals and observations are visible; the injected read failure
+  produces a real model-selected retry rather than an automatically inserted tool action.
+- Validation: Python checks arguments/evidence and determines accepted completion.
+- Tests: 19 unit checks plus independent verification of three final live reports.
+- Demonstration: presentation shows actual JSON-derived views; raw console logs are retained.
+- Explainability: distinguish model extraction/uncertainty from Python status rules;
+  distinguish a successful tool call, checked finish, and full semantic correctness.
+
+These reflect the saved classroom notes on model/Python roles and observed feedback
+(September 16; October 7, 21 and 28; November 4), and the provided mini-project rubric.
+Frameworks and browser-specific submission requirements from other assignments are
+not added to this project. Human review and limited test coverage remain explicit.
 
 ## GitHub submission
 

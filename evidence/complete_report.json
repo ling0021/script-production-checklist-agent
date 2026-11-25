@@ -1,12 +1,13 @@
 {
-  "created_utc": "2026-11-24T19:57:22.523980+00:00",
+  "created_utc": "2026-11-25T03:36:35.104536+00:00",
   "model": "qwen3:8b",
   "scene_id": "complete",
   "max_steps": 8,
-  "program_sha256": "560154690b05158c7bca216b11f16253a8de9af18228dd05dc3752de0e94e231",
-  "prompt_sha256": "f75ad1c2b7c04f05a263977bf56d8409437b70dffe45daa85459530d4ffd9c1f",
-  "tools_sha256": "91bba943360eb7a3bbabfe562e849d61a0c7f523f1dde44332e28e736a8feee2",
-  "checklist_sha256": "ab828d83fdde72f3b527b6fe2feb18f0acffd47ff0f539289f42c95cead226f1",
+  "experiment": "normal",
+  "program_sha256": "c1bc8fce6610f3d53948bf6d70e69f17de6c0b1cfe6da01bdf6ac176be323d44",
+  "prompt_sha256": "3443343782a4388edc96ce6fd6e78e0d70489595b6b365d3eb95cd930a29d190",
+  "tools_sha256": "b266aa4e39eda15a2c8c8c288fdf2648f90c0f7413053f11fc45b7dcb1ed5ddf",
+  "checklist_sha256": "815ad9b8ee230f99a5de2f3f4adfaf63e182200655047e1b74044e1bcd8bdce5",
   "trace": [
     {
       "step": 1,
@@ -27,9 +28,9 @@
         }
       },
       "usage": {
-        "prompt_eval_count": 465,
+        "prompt_eval_count": 621,
         "eval_count": 14,
-        "total_duration": 481251416
+        "total_duration": 1259106583
       }
     },
     {
@@ -139,6 +140,7 @@
               }
             ]
           },
+          "unresolved_references": [],
           "issues": [],
           "questions": [],
           "status": "ready_for_human_review",
@@ -146,9 +148,9 @@
         }
       },
       "usage": {
-        "prompt_eval_count": 637,
+        "prompt_eval_count": 793,
         "eval_count": 227,
-        "total_duration": 6243564000
+        "total_duration": 7025321125
       }
     },
     {
@@ -213,6 +215,7 @@
               }
             ]
           },
+          "unresolved_references": [],
           "issues": [],
           "questions": [],
           "status": "ready_for_human_review",
@@ -220,9 +223,9 @@
         }
       },
       "usage": {
-        "prompt_eval_count": 1262,
+        "prompt_eval_count": 1424,
         "eval_count": 19,
-        "total_duration": 2663416625
+        "total_duration": 2891763291
       }
     }
   ],
@@ -277,10 +280,11 @@
         }
       ]
     },
+    "unresolved_references": [],
     "issues": [],
     "questions": [],
     "status": "ready_for_human_review",
     "evidence_check": "All supplied values are supported by exact quotes; semantic completeness still needs human review."
   },
-  "elapsed_seconds": 9.44
+  "elapsed_seconds": 11.23
 }

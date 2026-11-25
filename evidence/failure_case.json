@@ -1,8 +1,9 @@
 {
+  "test_kind": "direct_tool_unit_check_not_live_agent",
   "proposal": {
     "tool": "read_scene",
     "arguments": {
-      "scene_id": "credit_card"
+      "scene_id": "unknown"
     }
   },
   "observation": {
@@ -10,13 +11,13 @@
     "message": "Read the scene requested by the user.",
     "data": {}
   },
-  "state_before": {
+  "before": {
     "requested_scene": "complete",
     "finished": false
   },
-  "state_after": {
+  "after": {
     "requested_scene": "complete",
     "finished": false
   },
-  "independent_check": "PASS: rejected without changing state"
+  "unchanged": true
 }

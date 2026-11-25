@@ -1,5 +1,16 @@
 {
-  "categories": ["characters", "locations", "props", "actions"],
+  "categories": [
+    "characters",
+    "locations",
+    "props",
+    "actions"
+  ],
   "purpose": "Identify the people, locations, physical props, and actions required by a fictional scene.",
-  "rule": "Every extracted item needs an exact supporting quote. Missing or ambiguous details must be flagged for human review."
+  "rule": "Every extracted item needs an exact supporting quote. Missing or ambiguous details must be flagged for human review.",
+  "review_criteria": {
+    "characters": "Identify each explicitly named person; unresolved pronouns require review.",
+    "locations": "Identify an explicitly stated setting. Furniture alone does not establish a setting.",
+    "props": "List specified physical objects. Vague references belong in uncertainties, not confirmed props.",
+    "actions": "List explicit scene actions with supporting quotations."
+  }
 }
