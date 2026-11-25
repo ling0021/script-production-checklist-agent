@@ -114,12 +114,6 @@ the checked status and enforces completion. A finish status is not a free model
 choice. The normal and recovery traces provide concrete evidence of differing
 model-selected action sequences.
 
-During development, the model omitted a stated scene-header location and once
-misspelled an evidence quote. The missing-location observation could not by itself
-guarantee correct extraction. Instructions now explicitly describe scene headings
-and rechecking omissions. This is a development lesson, not a claim of measured
-accuracy improvement; the supplied three reports come from the final version.
-
 ## Evidence and independent checks
 
 - `evidence/complete_report.json`, `evidence/incomplete_report.json`,
@@ -167,22 +161,6 @@ schedule shoots, perform purchases, update model weights, or automatically resol
 missing details. The "the one" reference is not separately flagged in the saved
 incomplete run; human review must check whether it denotes the same item or a
 different object. Multi-scene merging and an editor are possible later extensions.
-
-## Course and rubric alignment
-
-- Working task: complete scene checklist and missing-information questions, using fictional inputs.
-- Agent behavior: model proposals and observations are visible; the injected read failure
-  produces a real model-selected retry rather than an automatically inserted tool action.
-- Validation: Python checks arguments/evidence and determines accepted completion.
-- Tests: 19 unit checks plus independent verification of three final live reports.
-- Demonstration: presentation shows actual JSON-derived views; raw console logs are retained.
-- Explainability: distinguish model extraction/uncertainty from Python status rules;
-  distinguish a successful tool call, checked finish, and full semantic correctness.
-
-These reflect the saved classroom notes on model/Python roles and observed feedback
-(September 16; October 7, 21 and 28; November 4), and the provided mini-project rubric.
-Frameworks and browser-specific submission requirements from other assignments are
-not added to this project. Human review and limited test coverage remain explicit.
 
 ## GitHub submission
 
