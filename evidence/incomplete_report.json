@@ -1,12 +1,13 @@
 {
-  "created_utc": "2026-11-24T19:57:32.029547+00:00",
+  "created_utc": "2026-11-25T03:36:46.398683+00:00",
   "model": "qwen3:8b",
   "scene_id": "incomplete",
   "max_steps": 8,
-  "program_sha256": "560154690b05158c7bca216b11f16253a8de9af18228dd05dc3752de0e94e231",
-  "prompt_sha256": "f75ad1c2b7c04f05a263977bf56d8409437b70dffe45daa85459530d4ffd9c1f",
-  "tools_sha256": "91bba943360eb7a3bbabfe562e849d61a0c7f523f1dde44332e28e736a8feee2",
-  "checklist_sha256": "ab828d83fdde72f3b527b6fe2feb18f0acffd47ff0f539289f42c95cead226f1",
+  "experiment": "normal",
+  "program_sha256": "c1bc8fce6610f3d53948bf6d70e69f17de6c0b1cfe6da01bdf6ac176be323d44",
+  "prompt_sha256": "3443343782a4388edc96ce6fd6e78e0d70489595b6b365d3eb95cd930a29d190",
+  "tools_sha256": "b266aa4e39eda15a2c8c8c288fdf2648f90c0f7413053f11fc45b7dcb1ed5ddf",
+  "checklist_sha256": "815ad9b8ee230f99a5de2f3f4adfaf63e182200655047e1b74044e1bcd8bdce5",
   "trace": [
     {
       "step": 1,
@@ -27,14 +28,14 @@
         }
       },
       "usage": {
-        "prompt_eval_count": 465,
+        "prompt_eval_count": 621,
         "eval_count": 15,
-        "total_duration": 520618166
+        "total_duration": 548364875
       }
     },
     {
       "step": 2,
-      "model_response": "{\"tool\":\"compare_checklist\",\"arguments\":{\"extraction\":{\"characters\":[{\"value\":\"EVA\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"NOAH\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"}],\"locations\":[],\"props\":[{\"value\":\"the item\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"wooden table\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"silver camera\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"}],\"actions\":[{\"value\":\"places the item on a wooden table\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"lifts a silver camera\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"},{\"value\":\"photographs the item\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"}]},\"uncertainties\":[{\"category\":\"props\",\"evidence\":\"the item\",\"question\":\"What is the item referred to in this scene?\"}]}}",
+      "model_response": "{\"tool\":\"compare_checklist\",\"arguments\":{\"extraction\":{\"characters\":[{\"value\":\"EVA\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"NOAH\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"}],\"locations\":[],\"props\":[{\"value\":\"item\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"wooden table\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"silver camera\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"}],\"actions\":[{\"value\":\"places the item on a wooden table\",\"evidence\":\"EVA places the item on a wooden table.\"},{\"value\":\"lifts a silver camera and photographs the item\",\"evidence\":\"NOAH lifts a silver camera and photographs the item.\"}]},\"uncertainties\":[{\"category\":\"props\",\"evidence\":\"the item\",\"question\":\"What is the item referred to in this scene?\"}]}}",
       "proposal": {
         "tool": "compare_checklist",
         "arguments": {
@@ -52,7 +53,7 @@
             "locations": [],
             "props": [
               {
-                "value": "the item",
+                "value": "item",
                 "evidence": "EVA places the item on a wooden table."
               },
               {
@@ -70,11 +71,7 @@
                 "evidence": "EVA places the item on a wooden table."
               },
               {
-                "value": "lifts a silver camera",
-                "evidence": "NOAH lifts a silver camera and photographs the item."
-              },
-              {
-                "value": "photographs the item",
+                "value": "lifts a silver camera and photographs the item",
                 "evidence": "NOAH lifts a silver camera and photographs the item."
               }
             ]
@@ -108,10 +105,6 @@
             "locations": [],
             "props": [
               {
-                "value": "the item",
-                "evidence": "EVA places the item on a wooden table."
-              },
-              {
                 "value": "wooden table",
                 "evidence": "EVA places the item on a wooden table."
               },
@@ -126,15 +119,18 @@
                 "evidence": "EVA places the item on a wooden table."
               },
               {
-                "value": "lifts a silver camera",
-                "evidence": "NOAH lifts a silver camera and photographs the item."
-              },
-              {
-                "value": "photographs the item",
+                "value": "lifts a silver camera and photographs the item",
                 "evidence": "NOAH lifts a silver camera and photographs the item."
               }
             ]
           },
+          "unresolved_references": [
+            {
+              "category": "props",
+              "value": "item",
+              "evidence": "EVA places the item on a wooden table."
+            }
+          ],
           "issues": [
             {
               "category": "locations",
@@ -156,9 +152,9 @@
         }
       },
       "usage": {
-        "prompt_eval_count": 632,
-        "eval_count": 220,
-        "total_duration": 8928551833
+        "prompt_eval_count": 788,
+        "eval_count": 201,
+        "total_duration": 7889014959
       }
     },
     {
@@ -194,10 +190,6 @@
             "locations": [],
             "props": [
               {
-                "value": "the item",
-                "evidence": "EVA places the item on a wooden table."
-              },
-              {
                 "value": "wooden table",
                 "evidence": "EVA places the item on a wooden table."
               },
@@ -212,15 +204,18 @@
                 "evidence": "EVA places the item on a wooden table."
               },
               {
-                "value": "lifts a silver camera",
-                "evidence": "NOAH lifts a silver camera and photographs the item."
-              },
-              {
-                "value": "photographs the item",
+                "value": "lifts a silver camera and photographs the item",
                 "evidence": "NOAH lifts a silver camera and photographs the item."
               }
             ]
           },
+          "unresolved_references": [
+            {
+              "category": "props",
+              "value": "item",
+              "evidence": "EVA places the item on a wooden table."
+            }
+          ],
           "issues": [
             {
               "category": "locations",
@@ -242,9 +237,9 @@
         }
       },
       "usage": {
-        "prompt_eval_count": 1278,
+        "prompt_eval_count": 1403,
         "eval_count": 37,
-        "total_duration": 3668856209
+        "total_duration": 3413254833
       }
     }
   ],
@@ -267,10 +262,6 @@
       "locations": [],
       "props": [
         {
-          "value": "the item",
-          "evidence": "EVA places the item on a wooden table."
-        },
-        {
           "value": "wooden table",
           "evidence": "EVA places the item on a wooden table."
         },
@@ -285,15 +276,18 @@
           "evidence": "EVA places the item on a wooden table."
         },
         {
-          "value": "lifts a silver camera",
-          "evidence": "NOAH lifts a silver camera and photographs the item."
-        },
-        {
-          "value": "photographs the item",
+          "value": "lifts a silver camera and photographs the item",
           "evidence": "NOAH lifts a silver camera and photographs the item."
         }
       ]
     },
+    "unresolved_references": [
+      {
+        "category": "props",
+        "value": "item",
+        "evidence": "EVA places the item on a wooden table."
+      }
+    ],
     "issues": [
       {
         "category": "locations",
@@ -313,5 +307,5 @@
     "status": "needs_clarification",
     "evidence_check": "All supplied values are supported by exact quotes; semantic completeness still needs human review."
   },
-  "elapsed_seconds": 13.17
+  "elapsed_seconds": 11.9
 }

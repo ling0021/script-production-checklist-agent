@@ -18,12 +18,15 @@ Available tools/actions:
 Each extraction list contains objects {"value":"an exact substring from the scene","evidence":"an exact supporting scene quote"}.
 Use the scene's words, not paraphrases. Characters are people, locations are named settings,
 props are physical things including furniture, actions are verb phrases from the scene.
-Include every explicit person and concrete prop. Do not turn vague 'the item' into a guessed prop.
+Include every explicit person and concrete prop. Do not put vague 'the item' or 'the one' in confirmed props. Flag related references together in one uncertainty with an exact supporting quote and a specific question.
+INT./EXT. scene headings explicitly state a location. Extract the named setting between the heading prefix and time of day.
 Leave the locations list empty if no location is stated. Do not infer a location from furniture.
 For unclear references such as 'the item', add uncertainties:
 {"category":"props","evidence":"the item","question":"What is the item referred to in this scene?"}.
 Empty lists mean missing information. The comparison tool returns issues and specific questions.
 Read and react to errors: fix the proposal, never claim an error was success.
+If comparison reports a missing category, check the source again: if you omitted explicit information,
+call compare_checklist again with a corrected extraction. If the detail is truly absent, preserve the question.
 3. finish: arguments {"status":"ready_for_human_review" or "needs_clarification","questions":[]}.
 Only finish after comparison succeeds. Copy its status and questions exactly.
 For a complete scene finish ready_for_human_review; for missing/ambiguous information finish
@@ -65,16 +68,19 @@ def model_action(messages, model, endpoint):
     return result["message"]["content"], {key: result.get(key) for key in ("prompt_eval_count", "eval_count", "total_duration")}
 
 
-def run(scene_id, model="qwen3:8b", endpoint="http://127.0.0.1:11434", max_steps=8):
+def run(scene_id, model="qwen3:8b", endpoint="http://127.0.0.1:11434", max_steps=8, test_read_failure=False):
     if endpoint not in ("http://127.0.0.1:11434", "http://localhost:11434"):
         raise ValueError("Only the local model endpoint is allowed.")
     state = {"requested_scene": scene_id, "finished": False}
+    if test_read_failure:
+        state["test_read_failures_remaining"] = 1
     rubric = json.loads((ROOT / "config" / "checklist.json").read_text())
     messages = [{"role": "system", "content": SYSTEM + "\nProduction checklist: " + json.dumps(rubric)},
                 {"role": "user", "content": "Prepare a production checklist for scene_id=" + scene_id + ". Ask specific questions for missing or uncertain details."}]
     trace = []
     report = {"created_utc": datetime.now(timezone.utc).isoformat(), "model": model,
               "scene_id": scene_id, "max_steps": max_steps,
+              "experiment": "one_injected_transient_read_failure" if test_read_failure else "normal",
               "program_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               "prompt_sha256": hashlib.sha256(SYSTEM.encode()).hexdigest(),
               "tools_sha256": hashlib.sha256((ROOT / "tools.py").read_bytes()).hexdigest(),
@@ -113,13 +119,14 @@ def run(scene_id, model="qwen3:8b", endpoint="http://127.0.0.1:11434", max_steps
 def main():
     parser = argparse.ArgumentParser(description="Produce an evidence-checked scene checklist.")
     parser.add_argument("--scene", choices=SCENES, required=True)
+    parser.add_argument("--test-read-failure", action="store_true", help="Explicit test: fail the first scene read once, then let the model respond.")
     parser.add_argument("--model", default="qwen3:8b")
     parser.add_argument("--output", default=None, help="Relative report path, e.g. evidence/complete_report.json")
     args = parser.parse_args()
     output = Path(args.output or "evidence/" + args.scene + "_report.json")
     if output.is_absolute() or ".." in output.parts:
         parser.error("Use a relative output path inside the project.")
-    report = run(args.scene, args.model)
+    report = run(args.scene, args.model, test_read_failure=args.test_read_failure)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(report.get("result", {"stop_reason": report["stop_reason"]}), indent=2))

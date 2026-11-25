@@ -87,6 +87,34 @@ class ToolTests(unittest.TestCase):
         self.assertFalse(dispatch({"tool": "finish", "arguments": {"status": "needs_clarification", "questions": []}}, self.state)["ok"])
         self.assertTrue(dispatch({"tool": "finish", "arguments": {"status": "ready_for_human_review", "questions": []}}, self.state)["ok"])
 
+    def test_tiny_quote_rejected(self):
+        read_scene({"scene_id": "complete"}, self.state)
+        extraction = complete_extraction()
+        extraction["characters"] = [{"value": "E", "evidence": "E"}]
+        self.assertFalse(compare_checklist({"extraction": extraction, "uncertainties": []}, self.state)["ok"])
+
+    def test_uncertain_prop_is_separate(self):
+        read_scene({"scene_id": "incomplete"}, self.state)
+        extraction = complete_extraction()
+        extraction = {key: [] for key in extraction}
+        extraction["props"] = [{"value": "the item", "evidence": "EVA places the item on a wooden table."}]
+        result = compare_checklist({"extraction": extraction, "uncertainties": [{"category": "props", "evidence": "the item", "question": "What is the item?"}]}, self.state)
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["data"]["checklist"]["props"], [])
+        self.assertEqual(result["data"]["unresolved_references"][0]["value"], "the item")
+
+    def test_transient_failure_does_not_fake_read(self):
+        self.state["test_read_failures_remaining"] = 1
+        self.assertFalse(read_scene({"scene_id": "complete"}, self.state)["ok"])
+        self.assertNotIn("scene", self.state)
+        self.assertTrue(read_scene({"scene_id": "complete"}, self.state)["ok"])
+
+    def test_rejected_comparison_invalidates_previous_result(self):
+        read_scene({"scene_id": "complete"}, self.state)
+        compare_checklist({"extraction": complete_extraction(), "uncertainties": []}, self.state)
+        self.assertFalse(compare_checklist({}, self.state)["ok"])
+        self.assertNotIn("comparison", self.state)
+
     def test_unknown_tool(self):
         self.assertFalse(validate_proposal({"tool": "delete_files", "arguments": {}})[0])
 

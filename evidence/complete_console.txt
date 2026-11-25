@@ -50,6 +50,7 @@ Step 3 {"tool": "finish", "arguments": {"status": "ready_for_human_review", "que
       }
     ]
   },
+  "unresolved_references": [],
   "issues": [],
   "questions": [],
   "status": "ready_for_human_review",

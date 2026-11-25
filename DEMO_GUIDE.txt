@@ -1,36 +1,25 @@
-Script Production Checklist Agent - Ling Yang
+Class demonstration - Ling Yang
 
-1. Show scenes/complete.txt and explain the four required categories.
-2. Run: python3 agent.py --scene complete
-   Show each model-selected tool, its returned observation, and verified finish.
-   Point out EVA, NOAH, COMMUNITY STUDIO, blue folder, table and camera.
-3. Show scenes/incomplete.txt. It deliberately omits the setting and names no
-   concrete identity for "the item".
+1. Explain the problem: prepare a scene checklist, do not invent production facts.
+2. Show the two tools in tools.py and the model loop in agent.py.
+3. Run: python3 agent.py --scene complete
+   Show exact values and quotes; Python derives ready_for_human_review.
 4. Run: python3 agent.py --scene incomplete
-   Show the empty locations list, the prop uncertainty, and both questions.
-   Explain why needs_clarification is a successful handling of a problem case,
-   rather than a claim that production details are complete.
-5. Run: python3 verify_reports.py
-   Explain that separate Python assertions check exact scene evidence, expected
-   characters/props, missing location, uncertainty and final question consistency.
-6. Run: python3 -m unittest discover -s tests -v
-   Show tests that reject an invented prop, invalid scene ID and premature finish.
+   Show no location, confirmed table and camera, and the ambiguity question.
+   The location question is a Python template; the prop question is model-generated.
+5. Run: python3 agent.py --scene complete --test-read-failure --output evidence/recovery_report.json
+   Explain BEFORE running that a test flag injects one read failure.
+   Show failed read -> model chooses another read -> comparison -> checked finish.
+   This is a real model response to a controlled fault, not a natural outage.
+6. Run: python3 verify_reports.py
+   Run: python3 -m unittest discover -s tests -v
+7. Explain limits: three conditions are not a broad reliability study; authentic
+   quotations can still be misclassified or omit details. Human review is required.
 
-Questions to prepare for:
-- Who decides the next action? The local model. Python validates and executes it.
-- Why is this more than a fixed script? The model chooses from two tools and a
-  finish action; it extracts scene facts and responds to actual tool observations.
-  Its final decision differs between the complete and ambiguous scenes.
-- What is in the context? System rules, the request, prior model outputs and tool results.
-- Does feedback retrain the model? No. Context changes; model weights do not.
-- How is success checked? Quote checks and finish guards during the run, plus
-  separate assertions on saved reports and source fixtures.
-- What remains uncertain? Semantic completeness and correctness for unseen scenes.
-  A human reviews the checklist. Two demonstrations do not prove general reliability.
+Model role: extract, identify uncertainty, propose one action each turn.
+Python role: validate, execute, return real observations, derive checked status,
+reject unverified completion. Finish must match the checked observation.
+Tool feedback changes the next decision, not model weights.
 
-Classroom explanation:
-"My agent prepares a production checklist from a fictional scene. The model
-chooses tools, and Python checks the arguments and evidence. In the complete case,
-it returns a checklist for human review. In the incomplete case, it identifies a
-missing location and an unclear prop, then asks specific questions instead of
-inventing the answers."
+Commands overwrite the named evidence files. Preserve submitted evidence first.
+Missing model service is a failure, not successful checklist preparation.

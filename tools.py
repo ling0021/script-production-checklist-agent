@@ -1,6 +1,7 @@
 """Two narrow tools with input checks and evidence returned as data."""
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -19,6 +20,10 @@ def read_scene(arguments, state):
     scene_id = arguments["scene_id"]
     if not isinstance(scene_id, str) or scene_id not in SCENES:
         return rejected("Unknown scene_id. Allowed: complete, incomplete.")
+    # Explicit, opt-in experiment: one transient read failure, not a real outage.
+    if state.get("test_read_failures_remaining", 0) > 0:
+        state["test_read_failures_remaining"] -= 1
+        return rejected("TEST INJECTION: temporary scene read failure. Retry read_scene; no scene data was returned.")
     try:
         text = (ROOT / "scenes" / SCENES[scene_id]).read_text(encoding="utf-8")
     except OSError:
@@ -34,6 +39,8 @@ def read_scene(arguments, state):
 
 def compare_checklist(arguments, state):
     """Check the model's extracted facts against the scene and required categories."""
+    # A rejected re-comparison must invalidate older completion evidence.
+    state.pop("comparison", None)
     if "scene" not in state:
         return rejected("Read the requested scene before comparing.")
     if not isinstance(arguments, dict) or set(arguments) != {"extraction", "uncertainties"}:
@@ -55,7 +62,9 @@ def compare_checklist(arguments, state):
             value, quote = item["value"], item["evidence"]
             if not isinstance(value, str) or not value.strip() or not isinstance(quote, str) or not quote.strip():
                 return rejected("Values and evidence must be nonempty text.")
-            if quote not in text or value.casefold() not in quote.casefold():
+            if len(quote.strip()) < 3 or len(value.strip()) < 2:
+                return rejected("Evidence needs at least 3 characters and values at least 2.")
+            if quote not in text or not re.search(r"(?<!\w)" + re.escape(value) + r"(?!\w)", quote, re.I):
                 return rejected("Unsupported extraction. Use an exact scene quote and a value contained in it.")
             checked[category].append({"value": value, "evidence": quote})
     if not isinstance(uncertainties, list) or len(uncertainties) > 12:
@@ -81,8 +90,20 @@ def compare_checklist(arguments, state):
             return rejected("Supply a specific clarification question ending in a question mark.")
         issues.append({"category": category, "status": "uncertain", "evidence": quote})
         questions.append(question)
+    # Keep explicitly flagged vague references out of confirmed checklist items.
+    unresolved = []
+    for category in CATEGORIES:
+        retained = []
+        for item in checked[category]:
+            if any(i["category"] == category and item["value"].casefold() in i["evidence"].casefold() for i in issues if i["status"] == "uncertain"):
+                unresolved.append({"category": category, **item})
+            elif item["value"].casefold() in ("the item", "the one"):
+                return rejected("Vague reference needs a supported uncertainty and clarification question.")
+            else:
+                retained.append(item)
+        checked[category] = retained
     data = {"scene_id": state["scene"]["scene_id"], "scene_sha256": state["scene"]["sha256"],
-            "checklist": checked, "issues": issues, "questions": questions,
+            "checklist": checked, "unresolved_references": unresolved, "issues": issues, "questions": list(dict.fromkeys(questions)),
             "status": "needs_clarification" if issues else "ready_for_human_review",
             "evidence_check": "All supplied values are supported by exact quotes; semantic completeness still needs human review."}
     state["comparison"] = data

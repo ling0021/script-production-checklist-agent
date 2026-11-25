@@ -5,8 +5,8 @@ from pathlib import Path
 from tools import ROOT, CATEGORIES
 
 
-def verify(scene_id):
-    report = json.loads((ROOT / "evidence" / (scene_id + "_report.json")).read_text())
+def verify(scene_id, report_name=None):
+    report = json.loads((ROOT / "evidence" / (report_name or scene_id + "_report.json")).read_text())
     text = (ROOT / "scenes" / (scene_id + ".txt")).read_text()
     assert report["verified_completion"] is True, "Agent did not reach verified finish"
     assert report["stop_reason"] == "finish_verified"
@@ -42,13 +42,20 @@ def verify(scene_id):
         assert any(i["category"] == "props" and i["status"] == "uncertain" for i in result["issues"])
         assert any("where" in q.casefold() for q in result["questions"])
         assert any("item" in q.casefold() for q in result["questions"])
+        assert not any(v in ("the item", "the one") for v in values("props")), "Unresolved reference must not be confirmed prop"
         assert not any("folder" in v for v in values("props")), "Must not import the prop from the other scene"
-    return {"case": scene_id, "independent_check": "PASS", "steps": len(report["trace"]),
+    if report_name == "recovery_report.json":
+        assert report["experiment"] == "one_injected_transient_read_failure"
+        assert not report["trace"][0]["observation"]["ok"]
+        assert "TEST INJECTION" in report["trace"][0]["observation"]["message"]
+        assert report["trace"][1]["proposal"]["tool"] == "read_scene"
+        assert report["trace"][1]["observation"]["ok"]
+    return {"case": "recovery" if report_name else scene_id, "independent_check": "PASS", "steps": len(report["trace"]),
             "status": result["status"], "questions": result["questions"],
             "elapsed_seconds": report["elapsed_seconds"]}
 
 
 if __name__ == "__main__":
-    checks = [verify("complete"), verify("incomplete")]
+    checks = [verify("complete"), verify("incomplete"), verify("complete", "recovery_report.json")]
     (ROOT / "evidence" / "independent_checks.json").write_text(json.dumps(checks, indent=2))
     print(json.dumps(checks, indent=2))

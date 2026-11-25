@@ -5,7 +5,7 @@
     "steps": 3,
     "status": "ready_for_human_review",
     "questions": [],
-    "elapsed_seconds": 9.44
+    "elapsed_seconds": 11.23
   },
   {
     "case": "incomplete",
@@ -16,6 +16,14 @@
       "Where does this scene take place?",
       "What is the item referred to in this scene?"
     ],
-    "elapsed_seconds": 13.17
+    "elapsed_seconds": 11.9
+  },
+  {
+    "case": "recovery",
+    "independent_check": "PASS",
+    "steps": 4,
+    "status": "ready_for_human_review",
+    "questions": [],
+    "elapsed_seconds": 13.61
   }
 ]
