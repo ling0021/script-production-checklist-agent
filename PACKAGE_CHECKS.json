@@ -1,6 +1,6 @@
 {
   "naming_and_content_checks": "PASS",
-  "files_checked": 26,
+  "files_checked": 25,
   "presentation_xml_checked": true,
   "pdf_text_and_metadata_checked": true,
   "offline_tests": 15,
@@ -12,7 +12,6 @@
   "evidence_note": "Views are rendered from saved live reports, not browser screenshots.",
   "publication_status": "Repository published at https://github.com/ling0021/script-production-checklist-agent; implementation and merge history: pull/1.",
   "files": {
-    "使用说明.txt": "c69df692dfde4e72a32cabe9335d9ea9430b08e96f93355a5dec9aa3f2b1fc07",
     "requirements.txt": "bb71d77bbaa5be36ff876ae821ca9e8c09a8e734f4ef31f3493ae43be8d1854a",
     "tools.py": "91bba943360eb7a3bbabfe562e849d61a0c7f523f1dde44332e28e736a8feee2",
     "README.md": "8895f0ca6cb4f7851726f155ca48d4385e4e4717ce5386e1317dabf0ce6531c5",
