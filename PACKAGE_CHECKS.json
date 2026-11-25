@@ -15,7 +15,7 @@
   "files": {
     "requirements.txt": "bb71d77bbaa5be36ff876ae821ca9e8c09a8e734f4ef31f3493ae43be8d1854a",
     "tools.py": "b266aa4e39eda15a2c8c8c288fdf2648f90c0f7413053f11fc45b7dcb1ed5ddf",
-    "README.md": "a925809d9fa397c35dc6ac9b3be8291b58165624a878572537a3fed50bfe3038",
+    "README.md": "c4896137a173c41fb26ec3ca25f0fc6e86343dbe9360a0b1bab07fd48585c267",
     "verify_reports.py": "8647aa4279e26a6264924ebe3f1e370196355503cd6b575c4607fb21495d4677",
     ".gitignore": "f8d6fc5b1fc7ae047e42c6920bfdb6e3773adda4177c12e927be06e9f4d01d5a",
     "agent.py": "c1bc8fce6610f3d53948bf6d70e69f17de6c0b1cfe6da01bdf6ac176be323d44",
@@ -38,7 +38,7 @@
     "evidence/incomplete_console.txt": "8d43e79041386c054525430a338f7da1f37c47d240dee0f55c1f43452d4c2123",
     "config/checklist.json": "815ad9b8ee230f99a5de2f3f4adfaf63e182200655047e1b74044e1bcd8bdce5",
     "tests/test_tools.py": "e2ea833d61466046f45b00c61cacc8658b93192521f79a824512f41492ce6527",
-    "deliverables/Project_Presentation.pptx": "8faa819e095773d7f7fa1997c2c847f3adb357101209310073e985f55850f19a",
-    "deliverables/Project_Report.pdf": "3a3df7a9a11d8c1547044d25f0f6975c4518d649ed335fcb185ceb26125b4a38"
+    "deliverables/Project_Presentation.pptx": "13a134adae6c056695fe77c1e06be67052dc0daa3bfe0bca0a40656c576eb39f",
+    "deliverables/Project_Report.pdf": "7c90f00f2aa9dc4a02f0639d1bc02e91b3f49bdb6d2cc0e053389fcbbca8e632"
   }
 }
